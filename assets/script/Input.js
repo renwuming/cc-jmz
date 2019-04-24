@@ -23,9 +23,9 @@ cc.Class({
 
         this.bk.color = bk
         this.placeholder.string = `代码${code}`
-        this.placeholder.node.color = Global.textColor2
+        this.placeholder.node.color = Global.currentStyle.textColor2
         this.placeholder.node.opacity = 255
-        this.node.getComponent(cc.EditBox).fontColor = Global.bkColor
+        this.node.getComponent(cc.EditBox).fontColor = Global.currentStyle.bkColor
     },
 
     reset() {

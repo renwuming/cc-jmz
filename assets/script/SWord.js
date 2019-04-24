@@ -22,7 +22,7 @@ cc.Class({
         if (wrong) {
             this.text.node.color = new cc.Color(91, 82, 82)
         } else if (right) {
-            this.text.node.color = Global.rightColor
+            this.text.node.color = Global.currentStyle.rightColor
         } else {
             this.text.node.color = bk
         }

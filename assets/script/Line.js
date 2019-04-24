@@ -26,7 +26,6 @@ cc.Class({
             type: cc.Node,
             default: null,
         },
-        enemyColor: Global.color3,
     },
 
     init(data) {
@@ -42,22 +41,22 @@ cc.Class({
         this.round.string = index + 1
         if (answerE.red) {
             this.enemy.string = answerE.text
-            this.enemyBk.color = Global.rightColor
+            this.enemyBk.color = Global.currentStyle.rightColor
             this.enemy.node.color = new cc.Color(255, 255, 255)
         } else if(answerE.black) {
             this.enemy.string = answerE.text
-            this.enemyBk.color = Global.bkColor
+            this.enemyBk.color = Global.currentStyle.wrongColor
             this.enemy.node.color = new cc.Color(255, 255, 255)
         } else {
             this.enemy.string = answerE
         }
         if (answerF.black) {
             this.friend.string = answerF.text
-            this.friendBk.color = Global.bkColor
+            this.friendBk.color = Global.currentStyle.wrongColor
             this.friend.node.color = new cc.Color(255, 255, 255)
         } else if(answerF.red) {
             this.friend.string = answerF.text
-            this.friendBk.color = Global.rightColor
+            this.friendBk.color = Global.currentStyle.rightColor
             this.friend.node.color = new cc.Color(255, 255, 255)
         } else {
             this.friend.string = answerF

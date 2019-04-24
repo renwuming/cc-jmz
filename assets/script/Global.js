@@ -1,7 +1,30 @@
-const color1 = new cc.Color(220, 220, 220)
-const color2 = new cc.Color(200, 200, 200)
-const color3 = new cc.Color(180, 180, 180)
-const color4 = new cc.Color(160, 160, 160)
+
+const spaceColors = [new cc.Color(220, 220, 220), new cc.Color(200, 200, 200), new cc.Color(180, 180, 180), new cc.Color(160, 160, 160)]
+const styleDark = {
+    spaceColors,
+    textColor: new cc.Color(145, 215, 254),
+    textColor2: new cc.Color(76, 138, 75),
+    textColor3: new cc.Color(7, 21, 30),
+    stringColor: new cc.Color(177, 114, 88),
+    bkColor: new cc.Color(28, 28, 28),
+    bkColor2: new cc.Color(185, 217, 255),
+    rightColor: new cc.Color(76, 138, 75),
+    wrongColor: new cc.Color(28, 28, 28),
+    wordBkColor: new cc.Color(91, 28, 28),
+}
+const styleLight = {
+    spaceColors,
+    textColor: new cc.Color(145, 215, 254),
+    textColor2: new cc.Color(76, 138, 75),
+    textColor3: new cc.Color(7, 21, 30),
+    stringColor: new cc.Color(177, 114, 88),
+    bkColor: new cc.Color(255, 255, 255),
+    bkColor2: new cc.Color(185, 217, 255),
+    rightColor: new cc.Color(76, 138, 75),
+    wrongColor: new cc.Color(28, 28, 28),
+    wordBkColor: new cc.Color(160, 160, 160),
+}
+
 
 window.Global = {
     REQUEST_DELAY: 4000,
@@ -109,19 +132,10 @@ window.Global = {
         }
         return text
     },
-    color1,
-    color2,
-    color3,
-    color4,
-    textColor: new cc.Color(145, 215, 254),
-    textColor2: new cc.Color(76, 138, 75),
-    textColor3: new cc.Color(7, 21, 30),
-    stringColor: new cc.Color(177, 114, 88),
-    bkColor: new cc.Color(28, 28, 28),
-    bkColor2: new cc.Color(185, 217, 255),
-    spaceColors: [color1, color2, color3, color4],
-    rightColor: new cc.Color(76, 138, 75),
+    // currentStyle: styleDark,
+    currentStyle: styleLight,
     // urlPrefix: 'http://localhost:9999', // todo
     urlPrefix: 'https://www.renwuming.cn/jmz',
 }
+
 

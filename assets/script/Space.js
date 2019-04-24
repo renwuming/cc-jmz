@@ -25,7 +25,7 @@ cc.Class({
     },
 
     init(type, data) {
-        this.initColors = Global.spaceColors
+        this.initColors = Global.currentStyle.spaceColors
         this.initPos = [
             [-337.5, 0],
             [-112.5, 0],
@@ -49,9 +49,9 @@ cc.Class({
 
     updateWord(word) {
         this.Word.node.active = true
-        this.Word.node.color = Global.textColor2
+        this.Word.node.color = Global.currentStyle.textColor2
         this.Word.node.children.forEach(node => {
-            node.color = Global.textColor2
+            node.color = Global.currentStyle.textColor2
         })
         this.Word.node.getChildByName('bk').color = this.node.color
         this.Word.node.getChildByName('text').getComponent(cc.Label).string = word

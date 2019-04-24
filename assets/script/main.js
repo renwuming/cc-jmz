@@ -12,6 +12,10 @@ cc.Class({
             type: cc.Prefab,
             default: null,
         },
+        bk: {
+            type: cc.Node,
+            default: null,
+        },
         Header: {
             type: cc.Node,
             default: null,
@@ -144,8 +148,10 @@ cc.Class({
     onLoad() {
         const manager = cc.director.getCollisionManager(); // 获取碰撞检测管理器
         manager.enabled = true
-
-        cc.director.setClearColor(Global.bkColor)
+        // style设置
+        cc.director.setClearColor(Global.currentStyle.bkColor)
+        this.bk.color = Global.currentStyle.bkColor
+        this.HomeBtn.node.getChildByName('Background').color = Global.currentStyle.bkColor
 
         Global.GAME_ID = Global.getQuery('id')
 
@@ -220,7 +226,7 @@ cc.Class({
                 })
                 // 我方出题时候，对方的答题情况
                 codes.forEach((code, index) => {
-                    const EnemyAnswer = answerE[index]
+                    const EnemyAnswer = (answerE || {})[index]
                     if (!tableData1[EnemyAnswer]) tableData1[EnemyAnswer] = {
                         rightList: [],
                         wrongList: [],
@@ -253,7 +259,7 @@ cc.Class({
                 window.location = `../login?callback=${encodeURIComponent(window.location)}`
                 return
             }
-            let { teamWords, battle, userIndex, history, sumList, gameOver, winner, teamNames, enemyWords, allWords } = res
+            let { teamWords, battle, userIndex, history, sumList, gameOver, winner, teamNames, enemyWords, allWords, activeBattle } = res
             if (userIndex < 0) { // 旁观状态重置Menu
                 this.initMenus2(teamNames)
                 this.changeStep(-1)
@@ -261,7 +267,7 @@ cc.Class({
             const { desTeam, desUser, question, codes, answerE, answerF } = battle
             const desUserIndex = desUser + desTeam * 2
             const eIndex = 3 - desUserIndex
-            if(allWords) {
+            if (allWords) {
                 this.tables[0].updateWords(allWords[0]) // 展示双方词表
                 this.tables[2].updateWords(allWords[1])
             } else {
@@ -282,7 +288,7 @@ cc.Class({
                     if (this.teamIndex === desTeam && !answerF) { // 若为队友出题
                         this.updateDatiTableF(question)
                         this.changeStep(1)
-                    } else if (this.teamIndex !== desTeam && !answerE && userIndex === eIndex) { // 若为敌人出题
+                    } else if (this.teamIndex !== desTeam && !answerE && userIndex === eIndex && activeBattle > 1) { // 若为敌人出题
                         this.updateDatiTableE(question)
                         this.changeStep(2)
                     } else {

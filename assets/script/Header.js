@@ -55,10 +55,6 @@ cc.Class({
 
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
-
     updateText(data) {
         const { battle, userIndex, userList, activeBattle, teamNames } = data
         const { desTeam, desUser, question, answerF, answerE } = battle
@@ -68,7 +64,6 @@ cc.Class({
         const fNick = ` ·${userList[desUserIndex % 2 ? desUserIndex - 1 : desUserIndex + 1].nick}· `
         const eIndex = 3 - desUserIndex
         const eNick = ` ·${userList[eIndex].nick}· `
-        const enemyFlag = userIndex === eIndex
 
         if (!question) {
             this.mainText.string = `${teamNames[desTeam]}队${desNick}正在加密…`
@@ -81,7 +76,9 @@ cc.Class({
         } else {
             this.FText.string = `${teamNames[desTeam]}队${fNick}已提交解密`
         }
-        if (!answerE) {
+        if (activeBattle <= 1) {
+            this.EText.string = ``
+        } else if (!answerE) {
             if (!question) this.EText.string = `${teamNames[1 - desTeam]}队${eNick}正在等待拦截`
             else this.EText.string = `${teamNames[1 - desTeam]}队${eNick}正在拦截…`
         } else {
@@ -117,11 +114,11 @@ cc.Class({
     },
 
     start() {
-        this.node.color = Global.bkColor
+        this.node.color = Global.currentStyle.bkColor
         this.node.children.forEach(node => {
-            node.color = Global.textColor2
+            node.color = Global.currentStyle.textColor2
         })
-        this.winBox.color = Global.bkColor
+        this.winBox.color = Global.currentStyle.bkColor
     },
 
     // update (dt) {},

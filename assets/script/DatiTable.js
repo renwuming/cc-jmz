@@ -67,7 +67,10 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
+
     onLoad() {
+        this.node.getChildByName('bk').color = Global.currentStyle.bkColor
+        this.node.getChildByName('submit').getChildByName('Background').color = Global.currentStyle.bkColor
         this.node.zIndex = 1000
     },
 

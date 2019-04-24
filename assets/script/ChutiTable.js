@@ -28,7 +28,7 @@ cc.Class({
                 let Y = -20
                 input.init({
                     position: [X, Y],
-                    bk: Global.spaceColors[data[i]],
+                    bk: Global.currentStyle.spaceColors[data[i]],
                     code: data[i] + 1,
                 })
                 this.inputlist.push(input)
@@ -37,7 +37,7 @@ cc.Class({
             for (let i = 0; i < 3; i++) {
                 const input = this.inputlist[i]
                 input.init({
-                    bk: Global.spaceColors[data[i]],
+                    bk: Global.currentStyle.spaceColors[data[i]],
                     code: data[i] + 1,
                 })
             }
@@ -70,6 +70,11 @@ cc.Class({
                 alert('提交成功！')
             })
         }, this);
+    },
+
+    onLoad() {
+        this.node.getChildByName('bk').color = Global.currentStyle.bkColor
+        this.node.getChildByName('submit').getChildByName('Background').color = Global.currentStyle.bkColor
     },
 
     // update (dt) {},

@@ -11,7 +11,6 @@ cc.Class({
             type: cc.Component,
             default: null,
         },
-        initColor: new cc.Color(91, 82, 82),
         spaceList: [],
         areaList: [],
         box: null,
@@ -73,7 +72,7 @@ cc.Class({
         this.inSpace = -1
         this.endSpace = -1
         this.inSpaceNode = null
-        this.bk.node.color = this.initColor
+        this.bk.node.color = Global.currentStyle.wordBkColor
         this.text.node.color = new cc.Color(255, 255, 255)
     },
     resetBack() {
@@ -85,6 +84,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+
         const self = this
         this.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
             var delta = event.touch.getDelta()
@@ -112,7 +112,7 @@ cc.Class({
     },
 
     start() {
-
+        this.bk.node.color = Global.currentStyle.wordBkColor
     },
 
     onCollisionEnter: function (other, self) {

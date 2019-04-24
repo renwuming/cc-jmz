@@ -20,18 +20,18 @@ cc.Class({
             '敌\n方\n加\n密\n卡',
             '战\n绩\n记\n录',
         ]
-        this.bk.color = Global.bkColor
-        this.text.node.color = Global.textColor2
+        this.bk.color = Global.currentStyle.bkColor
+        this.text.node.color = Global.currentStyle.textColor2
     },
 
     show() {
-        this.bk.color = Global.bkColor2
-        this.text.node.color = Global.textColor3
+        this.bk.color = Global.currentStyle.bkColor2
+        this.text.node.color = Global.currentStyle.textColor3
     }, 
 
     reset() {
-        this.bk.color = Global.bkColor
-        this.text.node.color = Global.textColor2
+        this.bk.color = Global.currentStyle.bkColor
+        this.text.node.color = Global.currentStyle.textColor2
     },
 
     init(main, data) {

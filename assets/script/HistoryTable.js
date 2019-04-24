@@ -30,7 +30,6 @@ cc.Class({
             type: cc.Node,
             default: null,
         },
-        enemyColor: new cc.Color(204, 204, 204),
         lines: [],
     },
 
@@ -60,7 +59,7 @@ cc.Class({
         list.forEach((round, index) => {
             let { answerE, answerF, codes } = round
             answerF = answerF.map(n => n + 1).join('.')
-            answerE = answerE.map(n => n + 1).join('.')
+            answerE = (answerE || []).map(n => n + 1).join('.')
             codes = codes.map(n => n + 1).join('.')
             if (answerF !== codes) {
                 answerF = {
@@ -95,6 +94,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        this.th1.color = Global.currentStyle.bkColor
+        this.th2.color = Global.currentStyle.bkColor
     },
 
 
