@@ -4,6 +4,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        tip: {
+            type: cc.Prefab,
+            default: null,
+        },
         table: {
             type: cc.Prefab,
             default: null,
@@ -45,7 +49,25 @@ cc.Class({
         stepFlag: 0, // 0 出题，1 回答队友的题目，2 回答对手的题目
         timer: 0,
     },
+    initTip() {
+        let Tip = cc.instantiate(this.tip)
+        Tip.zIndex = 1000
+        Tip.opacity = 0
+        this.node.addChild(Tip)
+        const bk = Tip.children[0]
+        bk.color = Global.currentStyle.textColor2
+        this.Tip = Tip
+        const close = Tip.children[2]
 
+        close.on('click', function (event) {
+            Tip.opacity = 0
+        })
+    },
+    showTip(text) {
+        const Label = this.Tip.children[1].getComponent(cc.Label)
+        Label.string = text
+        this.Tip.opacity = 255
+    },
     updateChutiTable(data) {
         const t = this.ChutiTable.node.getComponent('ChutiTable')
         t.node.stepFlag = 0
@@ -146,6 +168,7 @@ cc.Class({
 
 
     onLoad() {
+        Global.MAIN = this
         const manager = cc.director.getCollisionManager(); // 获取碰撞检测管理器
         manager.enabled = true
         // style设置
@@ -168,6 +191,7 @@ cc.Class({
             this.DatiTableF,
         ]
         this.changeMenu()
+        this.initTip()
 
 
         this.getGameData()

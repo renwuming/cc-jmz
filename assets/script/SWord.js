@@ -15,6 +15,7 @@ cc.Class({
 
     init(data) {
         const { text, index, bk, wrong, right } = data
+        this.realText = text
         this.text.string = Global.handleText(text)
         // 设置坐标
         this.node.x = -this.node.width / 2
@@ -26,6 +27,20 @@ cc.Class({
         } else {
             this.text.node.color = bk
         }
+        const self = this
+        // 显示tip
+        this.node.on(cc.Node.EventType.MOUSE_DOWN, function (event) {
+            this.clickTime = +new Date()
+            this.mouseMove = false
+        }, this.node)
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
+            this.mouseMove = true
+        }, this.node)
+        this.node.on(cc.Node.EventType.MOUSE_UP, function (event) {
+            if(!this.mouseMove && +new Date() - this.clickTime < 200) {
+                Global.MAIN.showTip(self.realText)
+            }
+        }, this.node)
     },
 
 

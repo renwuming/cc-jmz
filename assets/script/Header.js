@@ -100,10 +100,32 @@ cc.Class({
         this.codeText1.active = true
         this.codeText2.active = true
         this.codeText3.active = true
-        question = question.map(Global.handleText)
-        this.codeText1.getChildByName('text').getComponent(cc.Label).string = question[0]
-        this.codeText2.getChildByName('text').getComponent(cc.Label).string = question[1]
-        this.codeText3.getChildByName('text').getComponent(cc.Label).string = question[2]
+        const questionShow = question.map(Global.handleText)
+        this.codeText1.getChildByName('text').getComponent(cc.Label).string = questionShow[0]
+        this.codeText1.realText = question[0]
+        this.codeText2.getChildByName('text').getComponent(cc.Label).string = questionShow[1]
+        this.codeText2.realText = question[1]
+        this.codeText3.getChildByName('text').getComponent(cc.Label).string = questionShow[2]
+        this.codeText3.realText = question[2]
+
+        this.addTipEvent(this.codeText1)
+        this.addTipEvent(this.codeText2)
+        this.addTipEvent(this.codeText3)
+    },
+    addTipEvent(node) {
+        // 显示tip
+        node.on(cc.Node.EventType.MOUSE_DOWN, function (event) {
+            this.clickTime = +new Date()
+            this.mouseMove = false
+        }, this.node)
+        node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
+            this.mouseMove = true
+        }, this.node)
+        node.on(cc.Node.EventType.MOUSE_UP, function (event) {
+            if(!this.mouseMove && +new Date() - this.clickTime < 200) {
+                Global.MAIN.showTip(node.realText)
+            }
+        }, this.node)
     },
 
     handleTeamText(userList, teamNames) {

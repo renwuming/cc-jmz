@@ -19,6 +19,7 @@ cc.Class({
 
     init(data) {
         let { text, position } = data
+        this.realText = text
         this.text.string = Global.handleText(text)
         this.node.zIndex = 1000
         // 设置坐标
@@ -93,6 +94,17 @@ cc.Class({
             this.zIndex = 1000 // 移动中的word在前
             self.handleSpace()
             self.endSpace = -1
+            this.mouseMove = true
+        }, this.node)
+        // 显示tip
+        this.node.on(cc.Node.EventType.MOUSE_DOWN, function (event) {
+            this.clickTime = +new Date()
+            this.mouseMove = false
+        }, this.node)
+        this.node.on(cc.Node.EventType.MOUSE_UP, function (event) {
+            if(!this.mouseMove && +new Date() - this.clickTime < 200) {
+                Global.MAIN.showTip(self.realText)
+            }
         }, this.node)
 
         this.node.on(cc.Node.EventType.TOUCH_END, function (event) {
