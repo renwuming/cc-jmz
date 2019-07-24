@@ -27,6 +27,7 @@ const styleLight = {
 
 
 window.Global = {
+    moveDistance: 5,
     REQUEST_DELAY: 4000,
     sleep: delay => new Promise((resolve => {
         setTimeout(resolve, delay)
@@ -92,6 +93,9 @@ window.Global = {
             xhr.withCredentials = true
             xhr.send(JSON.stringify(reqData))
         })
+    },
+    getDistance(pos, pos2) {
+        return Math.sqrt(Math.pow((pos.x-pos2.x),2)+Math.pow((pos.y-pos2.y),2))
     },
     getArea: function (pts, pts2) {
         let A = pts[1].x

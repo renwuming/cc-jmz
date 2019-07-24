@@ -94,7 +94,12 @@ cc.Class({
             this.zIndex = 1000 // 移动中的word在前
             self.handleSpace()
             self.endSpace = -1
-            this.mouseMove = true
+
+            // 移动距离大于3时
+            const distance = Global.getDistance(event.touch._point, event.touch._startPoint)
+            if(distance > Global.moveDistance) {
+                this.mouseMove = true
+            }
         }, this.node)
         // 显示tip
         this.node.on(cc.Node.EventType.MOUSE_DOWN, function (event) {

@@ -119,7 +119,11 @@ cc.Class({
             this.mouseMove = false
         }, this.node)
         node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
-            this.mouseMove = true
+            // 移动距离大于3时
+            const distance = Global.getDistance(event.touch._point, event.touch._startPoint)
+            if(distance > Global.moveDistance) {
+                this.mouseMove = true
+            }
         }, this.node)
         node.on(cc.Node.EventType.MOUSE_UP, function (event) {
             if(!this.mouseMove && +new Date() - this.clickTime < 200) {
